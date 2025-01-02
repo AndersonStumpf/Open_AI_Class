@@ -3,6 +3,7 @@ import os
 import json
 import yfinance as yf
 from dotenv import load_dotenv
+import streamlit as st
 
 load_dotenv(".env")
 
@@ -85,8 +86,22 @@ def text_generation(mensagens):
 
     return mensagens
 
+def main():
+    st.title("Chat with ChatGPT")
+
+    user_prompt = st.text_area("Your message to ChatGPT: ")
+
+    if st.button("Send"):
+        if user_prompt.strip():
+            with st.spinner("ChatGPT is thinking..."):
+                mensagens = [{'role': 'user', 'content': user_prompt}]
+                mensagens = text_generation(mensagens)
+                response_content = mensagens[-1].content
+            st.success("ChatGPT's Response:")
+            st.write(response_content)
+        else:
+            st.error("Please provide a message.")
 
 if __name__ == '__main__':
 
-    mensagens = [{'role': 'user', 'content': 'What is the current stock price of Ambev?'}]
-    mensagens = text_generation(mensagens)
+    main()
