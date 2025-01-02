@@ -10,6 +10,7 @@ python = "^3.12"
 openai = "^1.58.1"
 jupyter = "^1.1.1"
 python-dotenv = "^1.0.1"
+yfinance = "^0.2.51"
 
 
 [build-system]
